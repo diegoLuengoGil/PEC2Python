@@ -3,36 +3,44 @@
 
 BEGIN TRANSACTION;
 
--- Table: products
+-- Table: productos
 -- Stores inventory items
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE IF NOT EXISTS productos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    description TEXT,
-    price REAL NOT NULL CHECK(price >= 0),
+    nombre TEXT NOT NULL,
+    descripcion TEXT,
+    precio REAL NOT NULL CHECK(precio >= 0),
     stock INTEGER NOT NULL DEFAULT 0 CHECK(stock >= 0),
-    category TEXT
+    categoria TEXT
 );
 
--- Table: sales
+-- Table: ventas
 -- Stores sales transactions header
-CREATE TABLE IF NOT EXISTS sales (
+CREATE TABLE IF NOT EXISTS ventas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    sale_date TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
-    total_amount REAL DEFAULT 0.0,
-    status TEXT DEFAULT 'COMPLETED' -- COMPLETED, CANCELLED
+    total REAL DEFAULT 0.0,
+    estado TEXT DEFAULT 'COMPLETADA' -- COMPLETADA, CANCELADA
 );
 
--- Table: sale_items
+-- Table: lineas_venta
 -- Stores individual items belonging to a sale
-CREATE TABLE IF NOT EXISTS sale_items (
+CREATE TABLE IF NOT EXISTS lineas_venta (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    sale_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
-    quantity INTEGER NOT NULL CHECK(quantity > 0),
+    venta_id INTEGER NOT NULL,
+    producto_id INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL CHECK(cantidad > 0),
     subtotal REAL NOT NULL CHECK(subtotal >= 0),
-    FOREIGN KEY (sale_id) REFERENCES sales(id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    FOREIGN KEY (venta_id) REFERENCES ventas(id) ON DELETE CASCADE,
+    FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+-- Table: clientes
+-- Stores customer information
+CREATE TABLE IF NOT EXISTS clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    saldo REAL DEFAULT 0.0 CHECK(saldo >= 0)
 );
 
 COMMIT;

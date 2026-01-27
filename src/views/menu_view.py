@@ -12,4 +12,5 @@ class MenuView:
         print("4. Exportar/Importar datos")
         print("0. Exit")
 
-        return Utils.get_int()
+        opcion = Utils.get_int("Seleccione una opcion: ")
+        return opcion

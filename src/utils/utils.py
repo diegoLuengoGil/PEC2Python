@@ -46,3 +46,8 @@ class Utils:
             else:
                 print("Error: Input cannot be empty.")
         return value
+
+    @staticmethod
+    def confirmar_accion(mensaje: str) -> bool:
+        respuesta = input(f"{mensaje} (s/n): ").strip().lower()
+        return respuesta == 's'
