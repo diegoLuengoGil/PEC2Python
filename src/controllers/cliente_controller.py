@@ -4,11 +4,13 @@ from src.service.cliente_service import ClienteService
 from src.utils.utils import Utils
 
 class ClienteController:
+    """Controlador para gestionar operaciones relacionadas con clientes."""
     def __init__(self, cliente_view: ClienteView, cliente_service: ClienteService):
         self.cliente_view = cliente_view
         self.cliente_service = cliente_service
 
     def menu_clientes(self):
+        """Muestra el menú de clientes y maneja las opciones."""
         opcion = -1
         while opcion != 0:
             opcion = self.cliente_view.mostrar_menu()
@@ -27,6 +29,7 @@ class ClienteController:
                     self.cliente_view.mostrar_mensaje("Opción no válida.")
 
     def anadir_cliente(self):
+        """Agrega un nuevo cliente."""
         datos = self.cliente_view.solicitar_datos_cliente()
         cliente = Cliente(
             id=0,
@@ -40,6 +43,7 @@ class ClienteController:
             self.cliente_view.mostrar_mensaje("Error al añadir al cliente.")
 
     def modificar_cliente(self):
+        """Modifica un cliente existente."""
         id_cliente = self.cliente_view.solicitar_id_cliente()
         cliente_existente = self.cliente_service.obtener_cliente(id_cliente)
         
@@ -65,6 +69,7 @@ class ClienteController:
                     self.cliente_view.mostrar_mensaje("Error al modificar el cliente.")
 
     def eliminar_cliente(self):
+        """Elimina un cliente existente."""
         id_cliente = self.cliente_view.solicitar_id_cliente()
         cliente_existente = self.cliente_service.obtener_cliente(id_cliente)
 
@@ -79,5 +84,6 @@ class ClienteController:
                     self.cliente_view.mostrar_mensaje("Error al eliminar el cliente.")
 
     def mostrar_clientes(self):
+        """Muestra la lista de clientes."""
         clientes = self.cliente_service.listar_clientes()
         self.cliente_view.mostrar_lista_clientes(clientes)

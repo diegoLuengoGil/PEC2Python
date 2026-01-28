@@ -5,11 +5,13 @@ from src.utils.utils import Utils
 
 
 class InventarioController:
+    """Controlador para gestionar operaciones relacionadas con inventario."""
     def __init__(self, inventario_view: InventarioView, inventario_service: InventarioService):
         self.inventario_view = inventario_view
         self.inventario_service = inventario_service
 
     def menu_inventario(self):
+        """Muestra el menú de inventario y maneja las opciones."""
         opcion = -1
         while opcion != 0:
             opcion = self.inventario_view.mostrar_menu()
@@ -28,6 +30,7 @@ class InventarioController:
                     self.inventario_view.mostrar_mensaje("Opción no válida, por favor intente de nuevo.")
 
     def anadir_articulo(self):
+        """Agrega un nuevo artículo al inventario."""
         datos = self.inventario_view.solicitar_datos_producto()
         producto = Producto(
             id=0, # El ID se genera en la base de datos
@@ -43,6 +46,7 @@ class InventarioController:
             self.inventario_view.mostrar_mensaje("Error al añadir el producto.")
 
     def modificar_articulo(self):
+        """Modifica un artículo existente."""
         id_producto = self.inventario_view.solicitar_id_producto()
         producto_existente = self.inventario_service.obtener_producto(id_producto)
         
@@ -70,6 +74,7 @@ class InventarioController:
                     self.inventario_view.mostrar_mensaje("Error al modificar el producto.")
 
     def eliminar_articulo(self):
+        """Elimina un artículo existente."""
         id_producto = self.inventario_view.solicitar_id_producto()
         producto_existente = self.inventario_service.obtener_producto(id_producto)
 
@@ -84,5 +89,6 @@ class InventarioController:
                     self.inventario_view.mostrar_mensaje("Error al eliminar el producto.")
 
     def mostrar_inventario(self):
+        """Muestra la lista de productos en el inventario."""
         productos = self.inventario_service.listar_productos()
         self.inventario_view.mostrar_lista_productos(productos)

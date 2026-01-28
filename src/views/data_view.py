@@ -1,7 +1,7 @@
 from src.utils.utils import Utils
 
 
-class ExportView:
+class DataView:
     def show_menu(self) -> int:
         print("\n--- EXPORTAR / IMPORTAR (JSON) ---")
         print("1. Exportar datos a JSON")

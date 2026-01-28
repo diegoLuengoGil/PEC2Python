@@ -16,13 +16,11 @@ class VentaRepository:
             query_venta = "INSERT INTO ventas (total, estado) VALUES (?, ?)"
             cursor.execute(query_venta, (venta.total, venta.estado))
             venta_id = cursor.lastrowid
-            venta.id = venta_id
             
             # 2. Insertar items
             query_item = "INSERT INTO lineas_venta (venta_id, producto_id, cantidad, subtotal) VALUES (?, ?, ?, ?)"
             for item in venta.items:
                 cursor.execute(query_item, (venta_id, item.producto_id, item.cantidad, item.subtotal))
-                item.id = cursor.lastrowid
                 item.venta_id = venta_id
             
             conn.commit()

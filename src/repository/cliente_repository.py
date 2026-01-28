@@ -3,6 +3,7 @@ from src.models.cliente import Cliente
 from typing import List, Optional
 
 class ClienteRepository:
+    """Repositorio para gestionar operaciones relacionadas con clientes."""
     def __init__(self, db_manager: DBManager):
         self.db_manager = db_manager
 
@@ -15,7 +16,6 @@ class ClienteRepository:
             cursor = conn.cursor()
             cursor.execute(query, (cliente.nombre, cliente.email, cliente.saldo))
             conn.commit()
-            cliente.id = cursor.lastrowid
             exito = True
         except Exception as e:
             print(f"Error al agregar cliente: {e}")

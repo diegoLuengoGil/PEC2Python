@@ -12,24 +12,26 @@ from src.views.venta_view import VentaView
 from src.controllers.venta_controller import VentaController
 from src.repository.venta_repository import VentaRepository
 from src.service.venta_service import VentaService
-from src.controllers.export_controller import ExportController
-from src.views.export_view import ExportView
+from src.controllers.data_controller import DataController
+from src.views.data_view import DataView
 
 
 class MenuController:
-
+    """Controlador principal"""
     def __init__(self, menu_view: MenuView, db_manager: DBManager):
         self.menu_view = menu_view
         self.db_manager = db_manager
 
     def iniciar(self):
+        """Inicia el sistema y muestra el menú principal."""
         resultado = self.db_manager.initialize_database()
         print(resultado)
 
         # Inventario
         inventario_repository = InventarioRepository(self.db_manager)
         inventario_service = InventarioService(inventario_repository)
-        inventario_controller = InventarioController(InventarioView(), inventario_service)
+        inventario_controller = InventarioController(
+            InventarioView(), inventario_service)
 
         # Clientes
         cliente_repository = ClienteRepository(self.db_manager)
@@ -41,6 +43,7 @@ class MenuController:
         venta_service = VentaService(venta_repository, inventario_repository)
         venta_controller = VentaController(VentaView(), venta_service)
 
+        data_controller = DataController(DataView(), self.db_manager)
 
         opcion = None
         while opcion != 0:
@@ -54,12 +57,8 @@ class MenuController:
                 case 3:
                     cliente_controller.menu_clientes()
                 case 4:
-                    export_controller = ExportController(ExportView(), self.db_manager)
-                    export_controller.menu()
+                    data_controller.menu()
                 case 0:
                     print("Saliendo del sistema...")
                 case _:
                     print("Opcion no valida")
-
-
-    

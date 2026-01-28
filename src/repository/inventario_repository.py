@@ -3,6 +3,8 @@ from src.models.producto import Producto
 from typing import List, Optional
 
 class InventarioRepository:
+    """Gestión de productos (CRUD)."""
+
     def __init__(self, db_manager: DBManager):
         self.db_manager = db_manager
 
@@ -15,7 +17,6 @@ class InventarioRepository:
             cursor = conn.cursor()
             cursor.execute(query, (producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.categoria))
             conn.commit()
-            producto.id = cursor.lastrowid # Actualizamos el ID del objeto
             exito = True
         except Exception as e:
             print(f"Error al agregar producto: {e}")

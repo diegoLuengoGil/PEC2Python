@@ -4,6 +4,7 @@ from typing import List
 
 @dataclass
 class Venta:
+    """Modelo para representar una venta."""
     id: int
     total: float
     estado: str
