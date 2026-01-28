@@ -12,6 +12,8 @@ from src.views.venta_view import VentaView
 from src.controllers.venta_controller import VentaController
 from src.repository.venta_repository import VentaRepository
 from src.service.venta_service import VentaService
+from src.controllers.export_controller import ExportController
+from src.views.export_view import ExportView
 
 
 class MenuController:
@@ -52,10 +54,12 @@ class MenuController:
                 case 3:
                     cliente_controller.menu_clientes()
                 case 4:
-                    pass #exportar/importar
+                    export_controller = ExportController(ExportView(), self.db_manager)
+                    export_controller.menu()
                 case 0:
                     print("Saliendo del sistema...")
                 case _:
                     print("Opcion no valida")
+
 
     

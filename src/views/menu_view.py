@@ -9,8 +9,9 @@ class MenuView:
         print("1. Gestion de inventario")
         print("2. Gestion de ventas")
         print("3. Gestion de clientes")
-        print("4. Exportar/Importar datos")
+        print("4. Exportar/Importar datos (JSON)")
         print("0. Exit")
 
         opcion = Utils.get_int("Seleccione una opcion: ")
         return opcion
+
