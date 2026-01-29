@@ -13,8 +13,8 @@ class VentaRepository:
         try:
             cursor = conn.cursor()
             # 1. Insertar venta
-            query_venta = "INSERT INTO ventas (total, estado) VALUES (?, ?)"
-            cursor.execute(query_venta, (venta.total, venta.estado))
+            query_venta = "INSERT INTO ventas (total, estado, cliente_id) VALUES (?, ?, ?)"
+            cursor.execute(query_venta, (venta.total, venta.estado, venta.cliente_id))
             venta_id = cursor.lastrowid
             
             # 2. Insertar items
@@ -32,7 +32,7 @@ class VentaRepository:
 
     def listar_ventas(self) -> List[Venta]:
         """Lista todas las ventas (sin el detalle de items por eficiencia en listado simple)."""
-        query = "SELECT id, total, estado FROM ventas"
+        query = "SELECT id, total, estado, cliente_id FROM ventas"
         conn = self.db_manager.get_connection()
         ventas = []
         try:
@@ -43,7 +43,8 @@ class VentaRepository:
                 ventas.append(Venta(
                     id=row[0],
                     total=row[1],
-                    estado=row[2]
+                    estado=row[2],
+                    cliente_id=row[3]
                 ))
         except Exception as e:
             print(f"Error al listar ventas: {e}")
@@ -55,12 +56,12 @@ class VentaRepository:
         try:
             cursor = conn.cursor()
             # Obtener cabecera
-            cursor.execute("SELECT id, total, estado FROM ventas WHERE id = ?", (id_venta,))
+            cursor.execute("SELECT id, total, estado, cliente_id FROM ventas WHERE id = ?", (id_venta,))
             row = cursor.fetchone()
             if not row:
                 return None
             
-            venta = Venta(id=row[0], total=row[1], estado=row[2])
+            venta = Venta(id=row[0], total=row[1], estado=row[2], cliente_id=row[3])
             
             # Obtener items
             cursor.execute("SELECT id, venta_id, producto_id, cantidad, subtotal FROM lineas_venta WHERE venta_id = ?", (id_venta,))

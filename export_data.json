@@ -1,0 +1,14 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Prueba",
+      "descripcion": "Prueba",
+      "precio": 10.0,
+      "stock": 10,
+      "categoria": "Prueba"
+    }
+  ],
+  "clientes": [],
+  "ventas": []
+}

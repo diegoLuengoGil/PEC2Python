@@ -17,11 +17,11 @@ class DataController:
         while opcion != 0:
             opcion = self.data_view.show_menu()
             if opcion == 1:
-                path = self.data_view.ask_file_path('export_data.json')
+                path = 'export_data.json'
                 ok = self.data_service.export_data(path)
                 self.data_view.show_message('Exportacion completada.' if ok else 'Fallo en la exportacion.')
             elif opcion == 2:
-                path = self.data_view.ask_file_path('import_data.json')
+                path = 'import_data.json'
                 overwrite = self.data_view.confirm_overwrite()
                 ok = self.data_service.import_data(path, overwrite=overwrite)
                 self.data_view.show_message('Importacion completada.' if ok else 'Fallo en la importacion.')

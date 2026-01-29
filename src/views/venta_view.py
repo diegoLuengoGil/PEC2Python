@@ -12,11 +12,15 @@ class VentaView:
         opcion = Utils.get_int("Seleccione una opción: ")
         return opcion
 
+    def solicitar_cliente_id(self) -> int:
+        """Solicita el ID del cliente para la venta."""
+        return Utils.get_int("Ingrese el ID del Cliente: ")
+
     def solicitar_items_venta(self) -> List[Dict[str, int]]:
         """Solicita al usuario los productos y cantidades para una venta."""
         items = []
         continuar = True
-        print("\n--- Nueva Venta (Ingrese 0 en ID para finalizar) ---")
+        print("\n--- Añadir Productos (Ingrese 0 en ID para finalizar) ---")
         while continuar:
             producto_id = Utils.get_int("ID del Producto: ")
             if producto_id == 0:
@@ -37,6 +41,7 @@ class VentaView:
         
     def mostrar_detalle_venta(self, venta: Venta):
         print(f"\n--- Detalle de Venta ID: {venta.id} ---")
+        print(f"Cliente ID: {venta.cliente_id}")
         print(f"Estado: {venta.estado}")
         print(f"Total: {venta.total:.2f}")
         print("Items:")
@@ -50,10 +55,10 @@ class VentaView:
             print("\nNo hay ventas registradas.")
         else:
             print("\n--- Historial de Ventas ---")
-            print(f"{'ID':<5} {'Total':<10} {'Estado':<15}")
-            print("-" * 35)
+            print(f"{'ID':<5} {'Total':<10} {'Estado':<15} {'Cliente ID':<10}")
+            print("-" * 45)
             for v in ventas:
-                print(f"{v.id:<5} {v.total:<10.2f} {v.estado:<15}")
+                print(f"{v.id:<5} {v.total:<10.2f} {v.estado:<15} {v.cliente_id:<10}")
         
     def solicitar_id_venta(self) -> int:
         id_venta = Utils.get_int("Ingrese el ID de la venta: ")

@@ -4,17 +4,28 @@ from src.models.venta import Venta
 from src.models.item_venta import ItemVenta
 from typing import List, Dict, Optional
 
+from src.repository.cliente_repository import ClienteRepository
+
 class VentaService:
-    def __init__(self, venta_repository: VentaRepository, inventario_repository: InventarioRepository):
+    def __init__(self, venta_repository: VentaRepository, inventario_repository: InventarioRepository, cliente_repository: ClienteRepository):
         self.venta_repository = venta_repository
         self.inventario_repository = inventario_repository
+        self.cliente_repository = cliente_repository
 
-    def crear_venta(self, items_solicitados: List[Dict[str, int]]) -> bool:
+    def crear_venta(self, cliente_id: int, items_solicitados: List[Dict[str, int]]) -> bool:
         """
-        Crea una venta verificando stock y calculando totales.
+        Crea una venta verificando stock, cliente y calculando totales.
+        cliente_id: ID del cliente que realiza la compra
         items_solicitados: lista de diccionarios {'producto_id': int, 'cantidad': int}
         """
         resultado = False
+        
+        # Validar Cliente
+        cliente = self.cliente_repository.obtener_cliente_por_id(cliente_id)
+        if not cliente:
+            print(f"Error: Cliente con ID {cliente_id} no encontrado.")
+            return False
+
         if not items_solicitados:
             print("No se han seleccionado productos.")
         else:
@@ -56,7 +67,7 @@ class VentaService:
 
             if not error_validacion:
                 # 2. Guardar venta
-                venta = Venta(id=0, total=total_venta, estado="COMPLETADA", items=items_venta)
+                venta = Venta(id=0, total=total_venta, estado="COMPLETADA", cliente_id=cliente_id, items=items_venta)
                 if self.venta_repository.crear_venta(venta):
                     # 3. Actualizar stock
                     exito_stock = True

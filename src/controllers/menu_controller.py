@@ -39,8 +39,9 @@ class MenuController:
         cliente_controller = ClienteController(ClienteView(), cliente_service)
 
         # Ventas
+        # Ventas
         venta_repository = VentaRepository(self.db_manager)
-        venta_service = VentaService(venta_repository, inventario_repository)
+        venta_service = VentaService(venta_repository, inventario_repository, cliente_repository)
         venta_controller = VentaController(VentaView(), venta_service)
 
         data_controller = DataController(DataView(), self.db_manager)

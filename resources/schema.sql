@@ -1,10 +1,5 @@
--- Script for creating the database schema
--- Ensures tables are created if they do not exist (idempotent)
-
 BEGIN TRANSACTION;
 
--- Table: productos
--- Stores inventory items
 CREATE TABLE IF NOT EXISTS productos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
@@ -14,16 +9,14 @@ CREATE TABLE IF NOT EXISTS productos (
     categoria TEXT
 );
 
--- Table: ventas
--- Stores sales transactions header
 CREATE TABLE IF NOT EXISTS ventas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     total REAL DEFAULT 0.0,
-    estado TEXT DEFAULT 'COMPLETADA' -- COMPLETADA, CANCELADA
+    estado TEXT DEFAULT 'COMPLETADA',
+    cliente_id INTEGER NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
--- Table: lineas_venta
--- Stores individual items belonging to a sale
 CREATE TABLE IF NOT EXISTS lineas_venta (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     venta_id INTEGER NOT NULL,
@@ -34,8 +27,6 @@ CREATE TABLE IF NOT EXISTS lineas_venta (
     FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 
--- Table: clientes
--- Stores customer information
 CREATE TABLE IF NOT EXISTS clientes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,

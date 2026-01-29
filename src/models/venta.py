@@ -8,4 +8,5 @@ class Venta:
     id: int
     total: float
     estado: str
+    cliente_id: int
     items: List[ItemVenta] = field(default_factory=list)

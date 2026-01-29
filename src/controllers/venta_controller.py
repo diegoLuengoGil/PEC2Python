@@ -26,10 +26,11 @@ class VentaController:
 
     def nueva_venta(self):
         """Crea una nueva venta."""
+        cliente_id = self.venta_view.solicitar_cliente_id()
         items = self.venta_view.solicitar_items_venta()
         if items:
             print("Procesando venta...")
-            self.venta_service.crear_venta(items)
+            self.venta_service.crear_venta(cliente_id, items)
 
     def mostrar_historial(self):
         """Muestra el historial de ventas."""
