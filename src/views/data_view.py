@@ -1,4 +1,4 @@
-from src.utils.utils import Utils
+from utils.utils import Utils
 
 
 class DataView:

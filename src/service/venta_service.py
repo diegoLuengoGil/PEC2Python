@@ -1,10 +1,11 @@
-from src.repository.venta_repository import VentaRepository
-from src.repository.inventario_repository import InventarioRepository
-from src.models.venta import Venta
-from src.models.item_venta import ItemVenta
-from typing import List, Dict, Optional
+from repository.venta_repository import VentaRepository
+from repository.inventario_repository import InventarioRepository
+from models.venta import Venta
+from models.item_venta import ItemVenta
 
-from src.repository.cliente_repository import ClienteRepository
+from typing import Optional
+
+from repository.cliente_repository import ClienteRepository
 
 class VentaService:
     def __init__(self, venta_repository: VentaRepository, inventario_repository: InventarioRepository, cliente_repository: ClienteRepository):
@@ -12,7 +13,7 @@ class VentaService:
         self.inventario_repository = inventario_repository
         self.cliente_repository = cliente_repository
 
-    def crear_venta(self, cliente_id: int, items_solicitados: List[Dict[str, int]]) -> bool:
+    def crear_venta(self, cliente_id: int, items_solicitados: list[dict[str, int]]) -> bool:
         """
         Crea una venta verificando stock, cliente y calculando totales.
         cliente_id: ID del cliente que realiza la compra
@@ -90,7 +91,7 @@ class VentaService:
                 
         return resultado
 
-    def listar_ventas(self) -> List[Venta]:
+    def listar_ventas(self) -> list[Venta]:
         return self.venta_repository.listar_ventas()
     
     def obtener_venta(self, id_venta: int) -> Optional[Venta]:

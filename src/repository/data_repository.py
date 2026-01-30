@@ -1,6 +1,6 @@
 import json
-from typing import Dict, Any, List
-from src.database.db_manager import DBManager
+from typing import Any
+from database.db_manager import DBManager
 
 
 class DataRepository:
@@ -13,7 +13,7 @@ class DataRepository:
             conn = self.db_manager.get_connection()
             cursor = conn.cursor()
 
-            result: Dict[str, Any] = {}
+            result: dict[str, Any] = {}
 
             # Productos
             cursor.execute("SELECT id, nombre, descripcion, precio, stock, categoria FROM productos")

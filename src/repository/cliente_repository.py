@@ -1,6 +1,6 @@
-from src.database.db_manager import DBManager
-from src.models.cliente import Cliente
-from typing import List, Optional
+from database.db_manager import DBManager
+from models.cliente import Cliente
+from typing import Optional
 
 class ClienteRepository:
     """Repositorio para gestionar operaciones relacionadas con clientes."""
@@ -52,7 +52,7 @@ class ClienteRepository:
             exito = False
         return exito
 
-    def listar_clientes(self) -> List[Cliente]:
+    def listar_clientes(self) -> list[Cliente]:
         """Devuelve una lista con todos los clientes."""
         query = "SELECT id, nombre, email, saldo FROM clientes"
         conn = self.db_manager.get_connection()

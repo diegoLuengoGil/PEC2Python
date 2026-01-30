@@ -1,5 +1,5 @@
-from src.views.venta_view import VentaView
-from src.service.venta_service import VentaService
+from views.venta_view import VentaView
+from service.venta_service import VentaService
 
 class VentaController:
     """Controlador para gestionar operaciones relacionadas con ventas."""

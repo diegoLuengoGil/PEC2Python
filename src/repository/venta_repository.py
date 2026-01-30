@@ -1,7 +1,7 @@
-from src.database.db_manager import DBManager
-from src.models.venta import Venta
-from src.models.item_venta import ItemVenta
-from typing import List, Optional
+from database.db_manager import DBManager
+from models.venta import Venta
+from models.item_venta import ItemVenta
+from typing import Optional
 
 class VentaRepository:
     def __init__(self, db_manager: DBManager):
@@ -30,7 +30,7 @@ class VentaRepository:
             print(f"Error al crear venta: {e}")
             return False
 
-    def listar_ventas(self) -> List[Venta]:
+    def listar_ventas(self) -> list[Venta]:
         """Lista todas las ventas (sin el detalle de items por eficiencia en listado simple)."""
         query = "SELECT id, total, estado, cliente_id FROM ventas"
         conn = self.db_manager.get_connection()

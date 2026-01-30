@@ -1,6 +1,6 @@
-from src.repository.inventario_repository import InventarioRepository
-from src.models.producto import Producto
-from typing import List, Optional
+from repository.inventario_repository import InventarioRepository
+from models.producto import Producto
+from typing import Optional
 
 class InventarioService:
     def __init__(self, repositorio: InventarioRepository):
@@ -33,7 +33,7 @@ class InventarioService:
             resultado = self.repositorio.modificar_producto(producto)
         return resultado
 
-    def listar_productos(self) -> List[Producto]:
+    def listar_productos(self) -> list[Producto]:
         """Obtiene la lista de todos los productos."""
         return self.repositorio.listar_productos()
 

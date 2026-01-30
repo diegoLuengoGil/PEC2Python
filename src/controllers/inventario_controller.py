@@ -1,7 +1,7 @@
-from src.models.producto import Producto
-from src.views.inventario_view import InventarioView
-from src.service.inventario_service import InventarioService
-from src.utils.utils import Utils
+from models.producto import Producto
+from views.inventario_view import InventarioView
+from service.inventario_service import InventarioService
+from utils.utils import Utils
 
 
 class InventarioController:

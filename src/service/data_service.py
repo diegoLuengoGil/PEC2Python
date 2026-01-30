@@ -1,4 +1,4 @@
-from src.repository.data_repository import DataRepository
+from repository.data_repository import DataRepository
 
 
 class DataService:

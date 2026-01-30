@@ -1,6 +1,6 @@
-from src.repository.cliente_repository import ClienteRepository
-from src.models.cliente import Cliente
-from typing import List, Optional
+from repository.cliente_repository import ClienteRepository
+from models.cliente import Cliente
+from typing import Optional
 
 class ClienteService:
     def __init__(self, repositorio: ClienteRepository):
@@ -29,7 +29,7 @@ class ClienteService:
             resultado = self.repositorio.modificar_cliente(cliente)
         return resultado
 
-    def listar_clientes(self) -> List[Cliente]:
+    def listar_clientes(self) -> list[Cliente]:
         """Lista todos los clientes."""
         return self.repositorio.listar_clientes()
 

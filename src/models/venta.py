@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
-from src.models.item_venta import ItemVenta
-from typing import List
+from models.item_venta import ItemVenta
 
 @dataclass
 class Venta:
@@ -9,4 +8,4 @@ class Venta:
     total: float
     estado: str
     cliente_id: int
-    items: List[ItemVenta] = field(default_factory=list)
+    items: list[ItemVenta] = field(default_factory=list)

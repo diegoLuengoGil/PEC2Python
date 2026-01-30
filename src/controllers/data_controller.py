@@ -1,7 +1,7 @@
-from src.views.data_view import DataView
-from src.service.data_service import DataService
-from src.repository.data_repository import DataRepository
-from src.database.db_manager import DBManager
+from views.data_view import DataView
+from service.data_service import DataService
+from repository.data_repository import DataRepository
+from database.db_manager import DBManager
 
 
 class DataController:

@@ -1,6 +1,5 @@
-from src.utils.utils import Utils
-from src.models.venta import Venta
-from typing import List, Dict
+from utils.utils import Utils
+from models.venta import Venta
 
 class VentaView:
     def mostrar_menu(self) -> int:
@@ -16,7 +15,7 @@ class VentaView:
         """Solicita el ID del cliente para la venta."""
         return Utils.get_int("Ingrese el ID del Cliente: ")
 
-    def solicitar_items_venta(self) -> List[Dict[str, int]]:
+    def solicitar_items_venta(self) -> list[dict[str, int]]:
         """Solicita al usuario los productos y cantidades para una venta."""
         items = []
         continuar = True
@@ -50,7 +49,7 @@ class VentaView:
         for item in venta.items:
             print(f"{item.producto_id:<12} {item.cantidad:<5} {item.subtotal:<10.2f}")
 
-    def mostrar_lista_ventas(self, ventas: List[Venta]):
+    def mostrar_lista_ventas(self, ventas: list[Venta]):
         if not ventas:
             print("\nNo hay ventas registradas.")
         else:

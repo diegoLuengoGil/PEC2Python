@@ -1,7 +1,7 @@
-from src.models.cliente import Cliente
-from src.views.cliente_view import ClienteView
-from src.service.cliente_service import ClienteService
-from src.utils.utils import Utils
+from models.cliente import Cliente
+from views.cliente_view import ClienteView
+from service.cliente_service import ClienteService
+from utils.utils import Utils
 
 class ClienteController:
     """Controlador para gestionar operaciones relacionadas con clientes."""

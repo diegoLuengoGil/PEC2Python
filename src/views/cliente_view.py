@@ -1,6 +1,5 @@
-from src.utils.utils import Utils
-from src.models.cliente import Cliente
-from typing import List
+from utils.utils import Utils
+from models.cliente import Cliente
 
 class ClienteView:
     def mostrar_menu(self) -> int:
@@ -40,7 +39,7 @@ class ClienteView:
         print(f"Saldo: {cliente.saldo:.2f}")
 
 
-    def mostrar_lista_clientes(self, clientes: List[Cliente]):
+    def mostrar_lista_clientes(self, clientes: list[Cliente]):
         if not clientes:
             print("\nNo hay clientes registrados.")
         else:

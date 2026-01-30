@@ -1,6 +1,5 @@
-from src.utils.utils import Utils
-from src.models.producto import Producto
-from typing import List
+from utils.utils import Utils
+from models.producto import Producto
 
 class InventarioView:
     def mostrar_menu(self) -> int:
@@ -45,7 +44,7 @@ class InventarioView:
         print(f"Stock: {producto.stock}")
         print(f"Categoría: {producto.categoria}")
 
-    def mostrar_lista_productos(self, productos: List[Producto]):
+    def mostrar_lista_productos(self, productos: list[Producto]):
         if not productos:
             print("\nNo hay productos en el inventario.")
         else:

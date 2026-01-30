@@ -1,6 +1,6 @@
-from src.database.db_manager import DBManager
-from src.models.producto import Producto
-from typing import List, Optional
+from database.db_manager import DBManager
+from models.producto import Producto
+from typing import Optional
 
 class InventarioRepository:
     """Gestión de productos (CRUD)."""
@@ -57,7 +57,7 @@ class InventarioRepository:
             exito = False
         return exito
 
-    def listar_productos(self) -> List[Producto]:
+    def listar_productos(self) -> list[Producto]:
         """Devuelve una lista con todos los productos."""
         query = "SELECT id, nombre, descripcion, precio, stock, categoria FROM productos"
         conn = self.db_manager.get_connection()

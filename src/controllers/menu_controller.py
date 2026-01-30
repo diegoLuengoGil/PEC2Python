@@ -1,19 +1,19 @@
-from src.views.menu_view import MenuView
-from src.database.db_manager import DBManager
-from src.views.inventario_view import InventarioView
-from src.controllers.inventario_controller import InventarioController
-from src.repository.inventario_repository import InventarioRepository
-from src.service.inventario_service import InventarioService
-from src.views.cliente_view import ClienteView
-from src.controllers.cliente_controller import ClienteController
-from src.repository.cliente_repository import ClienteRepository
-from src.service.cliente_service import ClienteService
-from src.views.venta_view import VentaView
-from src.controllers.venta_controller import VentaController
-from src.repository.venta_repository import VentaRepository
-from src.service.venta_service import VentaService
-from src.controllers.data_controller import DataController
-from src.views.data_view import DataView
+from views.menu_view import MenuView
+from database.db_manager import DBManager
+from views.inventario_view import InventarioView
+from controllers.inventario_controller import InventarioController
+from repository.inventario_repository import InventarioRepository
+from service.inventario_service import InventarioService
+from views.cliente_view import ClienteView
+from controllers.cliente_controller import ClienteController
+from repository.cliente_repository import ClienteRepository
+from service.cliente_service import ClienteService
+from views.venta_view import VentaView
+from controllers.venta_controller import VentaController
+from repository.venta_repository import VentaRepository
+from service.venta_service import VentaService
+from controllers.data_controller import DataController
+from views.data_view import DataView
 
 
 class MenuController:
