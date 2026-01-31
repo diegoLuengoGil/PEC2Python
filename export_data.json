@@ -1,14 +1,37 @@
 {
   "productos": [
     {
-      "id": 1,
-      "nombre": "Prueba",
-      "descripcion": "Prueba",
-      "precio": 10.0,
-      "stock": 10,
-      "categoria": "Prueba"
+      "id": 2,
+      "nombre": "Manzana",
+      "descripcion": "",
+      "precio": 2.0,
+      "stock": 98,
+      "categoria": "Fruta"
     }
   ],
-  "clientes": [],
-  "ventas": []
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Juan",
+      "email": "juan@test.com",
+      "saldo": 100.0
+    }
+  ],
+  "ventas": [
+    {
+      "id": 1,
+      "total": 4.0,
+      "estado": "COMPLETADA",
+      "cliente_id": 1,
+      "items": [
+        {
+          "id": 1,
+          "venta_id": 1,
+          "producto_id": 2,
+          "cantidad": 2,
+          "subtotal": 4.0
+        }
+      ]
+    }
+  ]
 }

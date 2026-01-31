@@ -49,7 +49,7 @@ class DataRepository:
             result["clientes"] = clientes
 
             # Ventas + items
-            cursor.execute("SELECT id, total, estado FROM ventas")
+            cursor.execute("SELECT id, total, estado, cliente_id FROM ventas")
             ventas_rows = cursor.fetchall()
             ventas = []
 
@@ -74,6 +74,7 @@ class DataRepository:
                     "id": v[0],
                     "total": v[1],
                     "estado": v[2],
+                    "cliente_id": v[3],
                     "items": lista_items_objetos
                 }
                 
@@ -121,7 +122,7 @@ class DataRepository:
 
             # Insert ventas and items
             for v in data.get('ventas', []):
-                cursor.execute("INSERT INTO ventas (id, total, estado) VALUES (?, ?, ?)", (v.get('id'), v.get('total'), v.get('estado')))
+                cursor.execute("INSERT INTO ventas (id, total, estado, cliente_id) VALUES (?, ?, ?, ?)", (v.get('id'), v.get('total'), v.get('estado'), v.get('cliente_id')))
                 for it in v.get('items', []):
                     cursor.execute(
                         "INSERT INTO lineas_venta (id, venta_id, producto_id, cantidad, subtotal) VALUES (?, ?, ?, ?, ?)",

@@ -30,19 +30,21 @@ class MenuController:
         # Inventario
         inventario_repository = InventarioRepository(self.db_manager)
         inventario_service = InventarioService(inventario_repository)
+        inventario_view = InventarioView()
         inventario_controller = InventarioController(
-            InventarioView(), inventario_service)
+            inventario_view, inventario_service)
 
         # Clientes
         cliente_repository = ClienteRepository(self.db_manager)
         cliente_service = ClienteService(cliente_repository)
-        cliente_controller = ClienteController(ClienteView(), cliente_service)
+        cliente_view = ClienteView()
+        cliente_controller = ClienteController(cliente_view, cliente_service)
 
         # Ventas
         # Ventas
         venta_repository = VentaRepository(self.db_manager)
         venta_service = VentaService(venta_repository, inventario_repository, cliente_repository)
-        venta_controller = VentaController(VentaView(), venta_service)
+        venta_controller = VentaController(VentaView(), venta_service, cliente_view, cliente_service, inventario_view, inventario_service)
 
         data_controller = DataController(DataView(), self.db_manager)
 

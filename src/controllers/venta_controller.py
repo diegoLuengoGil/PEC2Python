@@ -1,11 +1,21 @@
 from views.venta_view import VentaView
 from service.venta_service import VentaService
+from views.cliente_view import ClienteView
+from service.cliente_service import ClienteService
+from views.inventario_view import InventarioView
+from service.inventario_service import InventarioService
 
 class VentaController:
     """Controlador para gestionar operaciones relacionadas con ventas."""
-    def __init__(self, venta_view: VentaView, venta_service: VentaService):
+    def __init__(self, venta_view: VentaView, venta_service: VentaService, 
+                 cliente_view: ClienteView, cliente_service: ClienteService,
+                 inventario_view: InventarioView, inventario_service: InventarioService):
         self.venta_view = venta_view
         self.venta_service = venta_service
+        self.cliente_view = cliente_view
+        self.cliente_service = cliente_service
+        self.inventario_view = inventario_view
+        self.inventario_service = inventario_service
 
     def menu_ventas(self):
         """Muestra el menú de ventas y maneja las opciones."""
@@ -26,6 +36,8 @@ class VentaController:
 
     def nueva_venta(self):
         """Crea una nueva venta."""
+        self.cliente_view.mostrar_lista_clientes(self.cliente_service.listar_clientes())
+        self.inventario_view.mostrar_lista_productos(self.inventario_service.listar_productos())
         cliente_id = self.venta_view.solicitar_cliente_id()
         items = self.venta_view.solicitar_items_venta()
         if items:

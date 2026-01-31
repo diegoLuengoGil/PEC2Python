@@ -1,11 +1,11 @@
 class Utils:
     """
-    Static helper class for console input validation.
+    Clase que contiene métodos estáticos para validación de entrada de datos.   
     """
 
     @staticmethod
     def get_int(prompt: str) -> int:
-        """Repeatedly asks for an integer until valid."""
+        '''Solicita un entero al usuario hasta que se ingrese un valor válido'''
         valid = False
         value = 0
         while not valid:
@@ -19,16 +19,13 @@ class Utils:
 
     @staticmethod
     def get_float(prompt: str) -> float:
-        """Repeatedly asks for a float until valid."""
+        '''Solicita un decimal al usuario hasta que se ingrese un valor válido'''
         valid = False
         value = 0.0
         while not valid:
             try:
                 user_input = input(prompt)
                 value = float(user_input)
-                # Check for negative check if needed, but keeping it generic here.
-                if value < 0:
-                    print("Warning: Value is negative.")
                 valid = True
             except ValueError:
                 print("Error: Please enter a valid number.")
@@ -47,7 +44,10 @@ class Utils:
                 print("Error: Input cannot be empty.")
         return value
 
+    
+
     @staticmethod
     def confirmar_accion(mensaje: str) -> bool:
+        '''Solicita una confirmación al usuario hasta que se ingrese un valor válido'''
         respuesta = input(f"{mensaje} (s/n): ").strip().lower()
         return respuesta == 's'
