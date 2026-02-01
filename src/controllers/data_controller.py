@@ -13,19 +13,20 @@ class DataController:
 
     def menu(self):
         """Muestra el menú de exportación/importación y maneja las opciones."""
-        opcion = None
+        opcion = -1
         while opcion != 0:
             opcion = self.data_view.show_menu()
-            if opcion == 1:
-                path = 'export_data.json'
-                ok = self.data_service.export_data(path)
-                self.data_view.show_message('Exportacion completada.' if ok else 'Fallo en la exportacion.')
-            elif opcion == 2:
-                path = 'export_data.json'
-                overwrite = self.data_view.confirm_overwrite()
-                ok = self.data_service.import_data(path, overwrite=overwrite)
-                self.data_view.show_message('Importacion completada.' if ok else 'Fallo en la importacion.')
-            elif opcion == 0:
-                break
-            else:
-                self.data_view.show_message('Opcion no valida')
+            match opcion:
+                case 1:
+                    path = 'export_data.json'
+                    ok = self.data_service.export_data(path)
+                    self.data_view.show_message('Exportacion completada.' if ok else 'Fallo en la exportacion.')
+                case 2:
+                    path = 'export_data.json'
+                    overwrite = self.data_view.confirm_overwrite()
+                    ok = self.data_service.import_data(path, overwrite=overwrite)
+                    self.data_view.show_message('Importacion completada.' if ok else 'Fallo en la importacion.')
+                case 0:
+                    self.data_view.show_message('Saliendo...')
+                case _:
+                    self.data_view.show_message('Opcion no valida')
