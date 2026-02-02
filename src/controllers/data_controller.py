@@ -6,6 +6,7 @@ from database.db_manager import DBManager
 
 class DataController:
     """Controlador para gestionar operaciones relacionadas con datos."""
+
     def __init__(self, data_view: DataView, db_manager: DBManager):
         self.data_view = data_view
         self.data_repo = DataRepository(db_manager)
@@ -18,15 +19,19 @@ class DataController:
             opcion = self.data_view.show_menu()
             match opcion:
                 case 1:
-                    path = 'export_data.json'
+                    path = "export_data.json"
                     ok = self.data_service.export_data(path)
-                    self.data_view.show_message('Exportacion completada.' if ok else 'Fallo en la exportacion.')
+                    self.data_view.show_message(
+                        "Exportacion completada." if ok else "Fallo en la exportacion."
+                    )
                 case 2:
-                    path = 'export_data.json'
+                    path = "export_data.json"
                     overwrite = self.data_view.confirm_overwrite()
-                    ok = self.data_service.import_data(path, overwrite=overwrite)
-                    self.data_view.show_message('Importacion completada.' if ok else 'Fallo en la importacion.')
+                    ok = self.data_service.import_data(path, overwrite)
+                    self.data_view.show_message(
+                        "Importacion completada." if ok else "Fallo en la importacion."
+                    )
                 case 0:
-                    self.data_view.show_message('Saliendo...')
+                    self.data_view.show_message("Saliendo...")
                 case _:
-                    self.data_view.show_message('Opcion no valida')
+                    self.data_view.show_message("Opcion no valida")
