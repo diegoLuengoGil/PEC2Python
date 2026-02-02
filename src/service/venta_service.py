@@ -25,9 +25,8 @@ class VentaService:
         cliente = self.cliente_repository.obtener_cliente_por_id(cliente_id)
         if not cliente:
             print(f"Error: Cliente con ID {cliente_id} no encontrado.")
-            return False
 
-        if not items_solicitados:
+        elif not items_solicitados:
             print("No se han seleccionado productos.")
         else:
             items_venta = []
@@ -38,7 +37,6 @@ class VentaService:
             productos_a_actualizar = []
 
             for req in items_solicitados:
-                # Usamos un flag para continuar solo si no hubo error
                 if not error_validacion:
                     prod_id = req['producto_id']
                     cantidad = req['cantidad']
@@ -55,22 +53,19 @@ class VentaService:
                             subtotal = producto.precio * cantidad
                             items_venta.append(ItemVenta(
                                 id=0,
-                                venta_id=0, # Se asignará al guardar
+                                venta_id=0,
                                 producto_id=prod_id,
                                 cantidad=cantidad,
                                 subtotal=subtotal
                             ))
                             total_venta += subtotal
-                            
-                            # Preparamos el producto con el nuevo stock para actualizarlo después
+
                             producto.stock -= cantidad
                             productos_a_actualizar.append(producto)
 
             if not error_validacion:
-                # 2. Guardar venta
                 venta = Venta(id=0, total=total_venta, estado="COMPLETADA", cliente_id=cliente_id, items=items_venta)
                 if self.venta_repository.crear_venta(venta):
-                    # 3. Actualizar stock
                     exito_stock = True
                     for prod in productos_a_actualizar:
                         if not self.inventario_repository.modificar_producto(prod):
@@ -82,7 +77,7 @@ class VentaService:
                         resultado = True
                     else:
                         print("Venta registrada pero hubo errores actualizando el stock.")
-                        resultado = True # La venta se hizo aunque con warnings
+                        resultado = True
                 else:
                     print("Error al guardar la venta.")
                     resultado = False
